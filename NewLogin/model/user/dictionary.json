@@ -1,0 +1,66 @@
+{
+  "module": "users",
+  "field_defs": {
+    "_id": {
+      "type": "text",
+      "label": "lbl_id",
+      "db_fields": {}
+    },
+    "username": {
+      "type": "text",
+      "repeater": true,
+      "required": true,
+      "label": "lbl_user_name",
+      "maxlength": 255,
+      "inline_edit": true,
+      "index": true,
+      "massupdate": true,
+      "tab_name": "General",
+      "db_fields": {
+        "type": "string"
+      }
+    },
+    "email": {
+      "type": "email",
+      "db_fields": [
+        {
+          "_id": false,
+          "address": {
+            "type": "string",
+            "unique": "false"
+          },
+          "primary": {
+            "type": "Boolean"
+          }
+        }
+      ],
+      "repeater": true,
+      "required": true,
+      "label": "lbl_email",
+      "index": true
+    },
+    "_created_date": {
+      "required": true,
+      "type": "datetime",
+      "label": "lbl_created_date",
+      "db_fields": {
+        "type": "Date"
+      }
+    },
+    "password": {
+      "type": "password",
+      "label": "lbl_password",
+      "required": true,
+      "db_fields": {
+        "type": "string"
+      }
+    },
+    "_deleted": {
+      "type": "system",
+      "db_fields": {
+        "type": "Boolean",
+        "default": false
+      }
+    }
+  }
+}
