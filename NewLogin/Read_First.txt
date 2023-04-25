@@ -1,14 +1,17 @@
 ----Hello there----
 This is Somnath, I tried build login setup and create user with particular structure Using NodeJS
 
-====This is ".env" file informations into config folder=== 
-PORT=4000
-MONGO_DB_URL='mongodb+srv://duttasom634:LVs8lDNssVPcXgjm@cluster0.9o3qw8k.mongodb.net/'
-JWT_SECRET_KEY="SECRET"
-MONGO_DB='test'
 
 
 CreateUser(POST)---localhost:4000/v1/create
 Login(POST)---localhost:4000/v1/login
 Authentication(POST)--- localhost:4000/v1/auth/verify
 Logout(PUT)---localhost:4000/v1/logout (Though jwt token cannot be destroyed)
+
+
+-------------You can login via demo user --------------------
+
+{
+"username":"demo",
+"password":"7044"
+}

@@ -10,13 +10,15 @@ let service = {}
 service.createUser = async (moduleData) => {
     return new Promise(async (resolve, reject) => {
         try {
+            
             let connection = mongoose.createConnection(db_config.DB_URL, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
             let db = connection.useDb(db_config.DEFAULT_DB||'test');
             let userModel = db.model('users', userSchema);
-           moduleData._created_date = new Date()
+            moduleData._created_date = new Date()
+           console.log(moduleData)
             let action = new userModel(moduleData);
             await action.save((err, result) => {
                 if (err) {
@@ -58,6 +60,7 @@ service.login = async (moduleData) => {
                         resolve({ success: false, message: "error" })
                     }
                     console.log(result)
+                    if(result.length>0 && typeof result !== 'undefined'){
                     let tokenData = {
                         userid: result[0]._id,
                         username: result[0].username,
@@ -72,6 +75,10 @@ service.login = async (moduleData) => {
                             resolve({ success: true, message: "login success", data: { auth_token: token, uid: result[0]._id, username: result[0].username } })
                         }
                     })
+                } else {
+                    connection.close()
+                    resolve({success:false, message:"Authentication failed (username or password wrong)"})
+                }
                 })
             } else {
                 resolve({ success: false, message: "Please enter proper credentials" })

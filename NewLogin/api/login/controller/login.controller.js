@@ -7,7 +7,6 @@ const loginController = {}
 
 loginController.createUser = async function (req, res) {
     try {
-
         let moduleData = req.body;
         let details = await LoginService.createUser(moduleData)
         if (details.success === true) {
