@@ -36,10 +36,12 @@ service.createUser = async (moduleData) => {
 }
 
 
+
 service.login = async (moduleData) => {
     return new Promise(async (resolve, reject) => {
         try {
             let jwtSecretKey = db_config.JWTsecretkey;
+             let email
             if (moduleData.data.username && moduleData.data.password) {
                 let connection = mongoose.createConnection(db_config.DB_URL, {
                     useNewUrlParser: true,
@@ -60,7 +62,10 @@ service.login = async (moduleData) => {
                         resolve({ success: false, message: "error" })
                     }
                     console.log(result)
-                    if(result.length>0 && typeof result !== 'undefined'){
+                    if(result.length>0){
+                         if(result[0].email[0].primary===true){
+                        email = result[0].email[0].address
+                        } 
                     let tokenData = {
                         userid: result[0]._id,
                         username: result[0].username,
